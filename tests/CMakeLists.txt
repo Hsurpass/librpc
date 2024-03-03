@@ -22,6 +22,9 @@ message("Protobuf_LIBRARIES: " ${Protobuf_LIBRARIES})
 message("Protobuf_PROTOC_LIBRARIES: " ${Protobuf_PROTOC_LIBRARIES})
 message("Protobuf_LITE_LIBRARIES: " ${Protobuf_LITE_LIBRARIES})
 
+execute_process(COMMAND bash -c "protoc -I. --cpp_out=${CMAKE_CURRENT_SOURCE_DIR} echorpc.proto")
+protobuf_generate_cpp(PROTO_SRC PROTO_HEADER echorpc.proto)  
+
 # find_package(GMock REQUIRED)
 # find_package(absl REQUIRED)
 
@@ -73,18 +76,30 @@ add_executable(echo_tcpserver net/echo_tcpserver.cpp)
 target_link_libraries(echo_tcpserver net log utils ssl crypto)
 
 #engine
-add_executable(rpc_echo_client test_echo_rpc_client.cpp rpc_echo_client.cpp echorpc.pb.cc)
-target_link_libraries(rpc_echo_client rpc net log utils ssl crypto 
+add_executable(rpc_echo_client 
+    test_echo_rpc_client.cpp 
+    rpc_echo_client.cpp 
+    echorpc.pb.cc
+)
+target_link_libraries(rpc_echo_client 
+    rpc net log utils  
     boost_thread
     ${Protobuf_LIBRARIES} 
     ${Protobuf_LITE_LIBRARIES}
+    ssl crypto
 )
 
-add_executable(rpc_echo_server test_echo_rpc_server.cpp rpc_echo_server.cpp echorpc.pb.cc)
-target_link_libraries(rpc_echo_server rpc net log utils ssl crypto 
+add_executable(rpc_echo_server 
+    test_echo_rpc_server.cpp 
+    rpc_echo_server.cpp 
+    echorpc.pb.cc
+)
+target_link_libraries(rpc_echo_server 
+    rpc net log utils 
     boost_thread
     ${Protobuf_LIBRARIES} 
     ${Protobuf_LITE_LIBRARIES}
+    ssl crypto 
 )
 
 

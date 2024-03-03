@@ -35,6 +35,7 @@ public:
     virtual boost::asio::ip::tcp::endpoint local_endpoint() = 0;
     virtual boost::asio::ip::tcp::endpoint remote_endpoint() = 0;
     virtual boost::asio::ip::tcp::socket &getSocket() = 0;
+    virtual std::shared_ptr<tsslSocket> getSSL() = 0;
 };
 
 } // namespace net

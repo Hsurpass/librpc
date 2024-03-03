@@ -22,6 +22,7 @@ public:
     RPCConnectorPtr self() { return std::dynamic_pointer_cast<RPCConnector>(shared_from_this()); }
 
 private:
+    bool on_verify(bool preverified, boost::asio::ssl::verify_context &verifyContext);
     NotifyFunc m_notifyFunc;
 };
 

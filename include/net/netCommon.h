@@ -11,7 +11,10 @@ namespace net {
 typedef std::shared_ptr<::google::protobuf::Message> MessagePtr;
 
 typedef std::shared_ptr<boost::asio::io_context::strand> StrandPtr;
+
 typedef std::shared_ptr<boost::asio::ssl::context> SSLContextPtr;
+typedef boost::asio::ssl::stream<boost::asio::ip::tcp::socket> tsslSocket;
+typedef tsslSocket tsslSocketPtr;
 
 class TcpSocket;
 typedef std::shared_ptr<TcpSocket> TcpSocketPtr;

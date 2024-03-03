@@ -7,7 +7,7 @@
 #include "netCommon.h"
 #include <boost/asio.hpp>
 #include <boost/asio/steady_timer.hpp>
-#include <boost/system/detail/error_code.hpp>
+// #include <boost/system/detail/error_code.hpp>
 #include <cstdint>
 #include <memory>
 #include <mutex>

@@ -10,11 +10,14 @@ using namespace net;
 
 class RPCAcceptor : public Acceptor {
 public:
-    RPCAcceptor(boost::asio::io_context &io, const std::string& ip, unsigned short port, bool reuseAddr = true,
+    RPCAcceptor(boost::asio::io_context &io, const std::string &ip, unsigned short port, bool reuseAddr = true,
                 bool keepalive = true);
     virtual ~RPCAcceptor();
 
     TcpConnectionPtr createConnection() override;
+
+private:
+    SSLContextPtr m_sslContext;
 };
 
 } // namespace xrpc

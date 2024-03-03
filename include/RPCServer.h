@@ -26,8 +26,10 @@ public:
     int32_t start(bool async = true) override;
     int32_t stop() override;
 
-private:
     RPCServerPtr self();
+private:
+
+    // SSLContextPtr m_sslContext;
 };
 
 } // namespace xrpc

@@ -31,7 +31,7 @@ void run_async_client() {
     RPCClientrPtr rpcclient(new RPCClient(io));
     std::shared_ptr<EchoService::rpc_EchoService_client> client(new EchoService::rpc_EchoService_client(rpcclient));
 
-    uint64_t id = client->connect(std::bind(&on_connect, _1, client));
+    uint64_t id = client->connect(std::bind(&on_connect, std::placeholders::_1, client));
     assert(id == CONNECT_ID);
 
     io.run();
